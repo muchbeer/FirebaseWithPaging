@@ -4,9 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
+
 import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -42,9 +47,52 @@ public class MainActivity extends AppCompatActivity {
 
     private void getPopularFamily() {
 
-        mainActivityViewModel.getPagedListObservable().subscribeOn(Schedulers.io())
+        mainActivityViewModel.getPagedEntityObservable().observe(this, pagedList -> {
+
+            Log.d(LOG_TAG, "The List of Muchbeer Family is : " + pagedList);
+
+            entityPaging = pagedList;
+            showOnRecyclerView();
+        });
+
+      /*  mainActivityViewModel.getPagedListObservable()
+
+                .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(observer)
-                            .subscribe(pagedList -> adapter.submitList(pagedList));
+                           // .subscribe(observer)
+                            .subscribe(pagedList -> {
+
+                                Log.d(LOG_TAG, "tHE list of user are : " + pagedList);
+                                entityPaging = pagedList;
+                            });*/
+
+
+
+        // adapter.submitList(pagedList)
+      //  showOnRecyclerView();
+
+    }
+
+    private void showOnRecyclerView() {
+        recyclerView = activityMainBinding.recyclerView;
+        //    movieAdapter = new MovieAdapter(this, moviesMain);
+//paging here below
+        adapter = new FirebaseAdapter();
+        adapter.submitList(entityPaging);
+
+        if (this.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        } else {
+
+
+            recyclerView.setLayoutManager(new GridLayoutManager(this, 4));
+
+
+        }
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 }

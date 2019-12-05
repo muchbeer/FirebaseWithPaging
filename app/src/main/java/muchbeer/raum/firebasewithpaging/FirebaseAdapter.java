@@ -19,10 +19,10 @@ import muchbeer.raum.firebasewithpaging.model.Entity;
 public class FirebaseAdapter extends PagedListAdapter<Entity, FirebaseAdapter.FirebaseAdapterViewHolder> {
 
 
-    protected FirebaseAdapter() {
+    private FirebaseAdapter() {
         super(DIFF_CALLBACK_FIREBASE);
     }
-public static DiffUtil.ItemCallback<Entity> DIFF_CALLBACK_FIREBASE =
+private static DiffUtil.ItemCallback<Entity> DIFF_CALLBACK_FIREBASE =
             new DiffUtil.ItemCallback<Entity>() {
                 @Override
                 public boolean areItemsTheSame(@NonNull Entity oldItem, @NonNull Entity newItem) {
@@ -54,7 +54,7 @@ public static DiffUtil.ItemCallback<Entity> DIFF_CALLBACK_FIREBASE =
     public void onBindViewHolder(@NonNull FirebaseAdapterViewHolder holder, int position) {
         Entity userEntity = getItem(position);
 
-        holder.binding.setUsermessage(userEntity);
+        holder.binding.setEntity(userEntity);
 
         if(userEntity.getPhotoUrl() != null)
             Glide.with(holder.binding.photoImageView.getContext())
@@ -68,7 +68,7 @@ public static DiffUtil.ItemCallback<Entity> DIFF_CALLBACK_FIREBASE =
     public class FirebaseAdapterViewHolder extends RecyclerView.ViewHolder {
 
         ListItemBinding binding;
-        public FirebaseAdapterViewHolder(@NonNull ListItemBinding itemView) {
+        private FirebaseAdapterViewHolder(@NonNull ListItemBinding itemView) {
             super(itemView.getRoot());
             this.binding = itemView;
         }

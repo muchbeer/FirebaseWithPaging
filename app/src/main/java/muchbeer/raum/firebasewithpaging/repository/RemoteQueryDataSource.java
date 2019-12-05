@@ -9,7 +9,7 @@ public class RemoteQueryDataSource extends ItemKeyedDataSource<Integer, Entity> 
 
     private RemoteRepository fetchFromRemoteQueryFirebase;
 
-    public RemoteQueryDataSource() {
+    private RemoteQueryDataSource() {
         fetchFromRemoteQueryFirebase = new RemoteRepository();
     }
 
@@ -20,7 +20,7 @@ public class RemoteQueryDataSource extends ItemKeyedDataSource<Integer, Entity> 
 
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Entity> callback) {
-
+        fetchFromRemoteQueryFirebase.fetchFirestoreData(params.key, params.requestedLoadSize, callback);
     }
 
     @Override

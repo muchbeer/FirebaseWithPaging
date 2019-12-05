@@ -126,6 +126,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "156686169080-lu3mpse4996tnnvn58364e14a0kj164m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "muchbeer.raum.firebasewithpaging",
+            "certificate_hash": "54c95d232b2a8308b3e51545d300d05fbc43ca13"
+          }
+        },
+        {
           "client_id": "156686169080-v5tiurm1fs58sblvum64ji4d8reqpah1.apps.googleusercontent.com",
           "client_type": 3
         }

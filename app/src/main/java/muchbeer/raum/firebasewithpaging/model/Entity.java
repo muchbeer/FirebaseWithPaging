@@ -2,6 +2,11 @@ package muchbeer.raum.firebasewithpaging.model;
 
 public class Entity {
 
+    private String text;
+    private String userName;
+    private String photoUrl;
+    private int id;
+
     public String getText() {
         return text;
     }
@@ -34,10 +39,7 @@ public class Entity {
         this.id = id;
     }
 
-    private String text;
-    private String userName;
-    private String photoUrl;
-    private int id;
+
 
 
     public Entity(){};
