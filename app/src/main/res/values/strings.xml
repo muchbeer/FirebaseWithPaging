@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FirebaseWithPaging</string>
+    <string name="user_name">Username</string>
+    <string name="paragraph2">Description</string>
+</resources>
